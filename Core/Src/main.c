@@ -299,15 +299,29 @@ void update7SEG(int index) {
 	}
 }
 
-int counter = 100;
+int counter = 25;
+int dot_count = 2;
+int led_count = 4;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim2) {
 	counter--;
 	if (counter <= 0) {
-		counter = 100;
-		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		counter = 25;
+		dot_count--;
+		led_count--;
 		update7SEG(index_led++);
-		if (index_led >= 4)
-			index_led = 0;
+	}
+
+	if (index_led >= 4)
+		index_led = 0;
+
+	if (dot_count <= 0) {
+		dot_count = 2;
+		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+	}
+
+	if (led_count <= 0) {
+		led_count = 4;
+		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 	}
 }
 /* USER CODE END 4 */
