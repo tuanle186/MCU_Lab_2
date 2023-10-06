@@ -300,27 +300,24 @@ void update7SEG(int index) {
 }
 
 int counter = 25;
-int dot_count = 2;
-int led_count = 4;
+int dot_counter = 2;
+int led_counter = 4;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim2) {
 	counter--;
+	dot_counter--;
+	led_counter--;
 	if (counter <= 0) {
 		counter = 25;
-		dot_count--;
-		led_count--;
 		update7SEG(index_led++);
 	}
-
 	if (index_led >= 4)
 		index_led = 0;
-
-	if (dot_count <= 0) {
-		dot_count = 2;
+	if (dot_counter <= 0) {
+		dot_counter = 50;
 		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	}
-
-	if (led_count <= 0) {
-		led_count = 4;
+	if (led_counter <= 0) {
+		led_counter = 100;
 		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 	}
 }

@@ -2505,12 +2505,12 @@ LOAD c:/st/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000020000000                led_buffer
  .data.counter  0x0000000020000010        0x4 ./Core/Src/main.o
                 0x0000000020000010                counter
- .data.dot_count
+ .data.dot_counter
                 0x0000000020000014        0x4 ./Core/Src/main.o
-                0x0000000020000014                dot_count
- .data.led_count
+                0x0000000020000014                dot_counter
+ .data.led_counter
                 0x0000000020000018        0x4 ./Core/Src/main.o
-                0x0000000020000018                led_count
+                0x0000000020000018                led_counter
  .data.SystemCoreClock
                 0x000000002000001c        0x4 ./Core/Src/system_stm32f1xx.o
                 0x000000002000001c                SystemCoreClock
@@ -2730,28 +2730,28 @@ LOAD c:/st/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_line    0x00000000000047fd     0x3346 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .debug_line    0x0000000000007b43     0x1836 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
 
-.debug_str      0x0000000000000000    0x81eb2
- .debug_str     0x0000000000000000    0x7fc6b ./Core/Src/main.o
-                                      0x80052 (size before relaxing)
- .debug_str     0x000000000007fc6b      0x2ba ./Core/Src/stm32f1xx_hal_msp.o
+.debug_str      0x0000000000000000    0x81eae
+ .debug_str     0x0000000000000000    0x7fc67 ./Core/Src/main.o
+                                      0x80056 (size before relaxing)
+ .debug_str     0x000000000007fc67      0x2ba ./Core/Src/stm32f1xx_hal_msp.o
                                       0x80050 (size before relaxing)
- .debug_str     0x000000000007ff25       0xcd ./Core/Src/stm32f1xx_it.o
+ .debug_str     0x000000000007ff21       0xcd ./Core/Src/stm32f1xx_it.o
                                       0x7fdb2 (size before relaxing)
- .debug_str     0x000000000007fff2       0x52 ./Core/Src/system_stm32f1xx.o
+ .debug_str     0x000000000007ffee       0x52 ./Core/Src/system_stm32f1xx.o
                                       0x7f6d1 (size before relaxing)
- .debug_str     0x0000000000080044       0x36 ./Core/Startup/startup_stm32f103c6ux.o
+ .debug_str     0x0000000000080040       0x36 ./Core/Startup/startup_stm32f103c6ux.o
                                          0x60 (size before relaxing)
- .debug_str     0x000000000008007a      0x304 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_str     0x0000000000080076      0x304 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
                                       0x7fd28 (size before relaxing)
- .debug_str     0x000000000008037e      0x300 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_str     0x000000000008037a      0x300 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
                                       0x7fd30 (size before relaxing)
- .debug_str     0x000000000008067e      0x324 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_str     0x000000000008067a      0x324 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
                                       0x7fa95 (size before relaxing)
- .debug_str     0x00000000000809a2      0x24f ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_str     0x000000000008099e      0x24f ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
                                       0x7face (size before relaxing)
- .debug_str     0x0000000000080bf1      0xdd3 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+ .debug_str     0x0000000000080bed      0xdd3 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
                                       0x80aa7 (size before relaxing)
- .debug_str     0x00000000000819c4      0x4ee ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+ .debug_str     0x00000000000819c0      0x4ee ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
                                       0x80258 (size before relaxing)
 
 .comment        0x0000000000000000       0x53
