@@ -57,6 +57,20 @@ void updateClockBuffer(int h, int m);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int timer0_counter = 0;
+int timer0_flag = 0;
+int TIMER_CYCLE = 10;
+void setTimer0(int duration) {
+	timer0_counter = duration/TIMER_CYCLE;
+	timer0_flag = 0;
+}
+void timer_run() {
+	if (timer0_counter > 0) {
+		timer0_counter--;
+		if (timer0_counter == 0) timer0_flag = 1;
+	}
+}
+
 void display7SEG(int num) {
 	switch(num) {
 		case 0:
@@ -139,23 +153,29 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int hour = 9, minute = 8, second = 50;
+//  int hour = 9, minute = 8, second = 50;
+  setTimer0(1);
   while (1)
   {
-	  second++;
-	  if (second >= 60) {
-		  second = 0;
-		  minute++;
+//	  second++;
+//	  if (second >= 60) {
+//		  second = 0;
+//		  minute++;
+//	  }
+//	  if (minute >= 60) {
+//		  minute = 0;
+//		  hour++;
+//	  }
+//	  if (hour >= 24) {
+//		  hour = 0;
+//	  }
+//	  updateClockBuffer(hour, minute);
+//	  HAL_Delay(1000);
+
+	  if (timer0_flag == 1) {
+		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		  setTimer0(2000);
 	  }
-	  if (minute >= 60) {
-		  minute = 0;
-		  hour++;
-	  }
-	  if (hour >= 24) {
-		  hour = 0;
-	  }
-	  updateClockBuffer(hour, minute);
-	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -326,26 +346,28 @@ int counter = 25;
 int dot_counter = 50;
 int led_counter = 100;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim2) {
-	counter--;
-	dot_counter--;
-	led_counter--;
-	if (counter <= 0) {
-		counter = 25;
-		update7SEG(index_led++);
-	}
+	timer_run();
 
-	if (index_led >= 4)
-		index_led = 0;
-
-	if (dot_counter <= 0) {
-		dot_counter = 50;
-		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-	}
-
-	if (led_counter <= 0) {
-		led_counter = 100;
-		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-	}
+//	counter--;
+//	dot_counter--;
+//	led_counter--;
+//	if (counter <= 0) {
+//		counter = 25;
+//		update7SEG(index_led++);
+//	}
+//
+//	if (index_led >= 4)
+//		index_led = 0;
+//
+//	if (dot_counter <= 0) {
+//		dot_counter = 50;
+//		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+//	}
+//
+//	if (led_counter <= 0) {
+//		led_counter = 100;
+//		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+//	}
 }
 /* USER CODE END 4 */
 
