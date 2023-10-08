@@ -225,6 +225,13 @@ void updateLEDMatrix(int index){
             break;
     }
 }
+void shiftUpMatrixBuffer() {
+	// Shift left matrix_buffer:
+	uint8_t tmp = matrix_buffer[0];
+	for (int i = 0; i < 7; i++)
+		matrix_buffer[i] = matrix_buffer[i + 1];
+	matrix_buffer[7] = tmp;
+}
 /* USER CODE END 0 */
 
 /**
@@ -293,8 +300,10 @@ int main(void)
 		  if (index_led >= 4)
 			  index_led = 0;
 		  updateLEDMatrix(index_matrix++);
-		  if (index_matrix >= 8)
+		  if (index_matrix >= 8) {
 			  index_matrix = 0;
+			  shiftUpMatrixBuffer();
+		  }
 		  setTimer1(250);
 	  }
     /* USER CODE END WHILE */
