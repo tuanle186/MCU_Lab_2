@@ -59,8 +59,8 @@ void updateClockBuffer(int h, int m);
 /* USER CODE BEGIN 0 */
 /* Software timer Begin */
 int TIMER_CYCLE = 10;
-int timer0_counter = 0, timer1_counter = 0;
-int timer0_flag = 0, timer1_flag = 0;
+int timer0_counter = 0, timer1_counter = 0, timer2_counter = 0, timer3_counter = 0, timer4_counter = 0;
+int timer0_flag = 0, timer1_flag = 0, timer2_flag = 0, timer3_flag = 0, timer4_flag = 0;
 void setTimer0(int duration) {
 	timer0_counter = duration/TIMER_CYCLE;
 	timer0_flag = 0;
@@ -68,6 +68,18 @@ void setTimer0(int duration) {
 void setTimer1(int duration) {
 	timer1_counter = duration/TIMER_CYCLE;
 	timer1_flag = 0;
+}
+void setTimer2(int duration) {
+	timer2_counter = duration/TIMER_CYCLE;
+	timer2_flag = 0;
+}
+void setTimer3(int duration) {
+	timer3_counter = duration/TIMER_CYCLE;
+	timer3_flag = 0;
+}
+void setTimer4(int duration) {
+	timer4_counter = duration/TIMER_CYCLE;
+	timer4_flag = 0;
 }
 void timer_run() {
 	if (timer0_counter > 0) {
@@ -77,6 +89,18 @@ void timer_run() {
 	if (timer1_counter > 0) {
 		timer1_counter--;
 		if (timer1_counter == 0) timer1_flag = 1;
+	}
+	if (timer2_counter > 0) {
+		timer2_counter--;
+		if (timer2_counter == 0) timer2_flag = 1;
+	}
+	if (timer3_counter > 0) {
+		timer3_counter--;
+		if (timer3_counter == 0) timer3_flag = 1;
+	}
+	if (timer4_counter > 0) {
+		timer4_counter--;
+		if (timer4_counter == 0) timer4_flag = 1;
 	}
 }
 /* Software timer End */
@@ -269,47 +293,61 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int hour = 9, minute = 8, second = 50;
-  int index_led = 0;
-  int index_matrix = 0;
-  setTimer0(1000);
-  setTimer1(250);
-  while (1)
-  {
-	  if (timer0_flag == 1) {
-		  second++;
-		  if (second >= 60) {
-			  second = 0;
-			  minute++;
-		  }
-		  if (minute >= 60) {
-			  minute = 0;
-			  hour++;
-		  }
-		  if (hour >= 24) {
-			  hour = 0;
-		  }
-		  updateClockBuffer(hour, minute);
-		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-		  setTimer0(1000);
-	  }
+	int hour = 9, minute = 8, second = 50;
+	int index_led = 0;
+	int index_matrix = 0;
+	setTimer0(1000);
+	setTimer1(1000);
+	setTimer2(250);
+	setTimer3(250);
+	setTimer4(2000);
+	while (1)
+	{
+		if (timer0_flag == 1) {
+			second++;
+			if (second >= 60) {
+				second = 0;
+				minute++;
+			}
+			if (minute >= 60) {
+				minute = 0;
+				hour++;
+			}
+			if (hour >= 24) {
+				hour = 0;
+			}
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+			HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+			setTimer0(1000);
+		}
 
-	  if (timer1_flag == 1) {
+		if (timer1_flag == 1) {
+		  updateClockBuffer(hour, minute);
+		  setTimer1(1000);
+		}
+
+		if (timer2_flag == 1) {
 		  update7SEG(index_led++);
 		  if (index_led >= 4)
 			  index_led = 0;
-		  updateLEDMatrix(index_matrix++);
-		  if (index_matrix >= 8) {
-			  index_matrix = 0;
-			  shiftUpMatrixBuffer();
-		  }
-		  setTimer1(250);
-	  }
+		  setTimer2(250);
+		}
+
+		if (timer3_flag == 1) {
+			updateLEDMatrix(index_matrix++);
+			if (index_matrix >= 8)
+				index_matrix = 0;
+			setTimer3(250);
+		}
+
+		if (timer4_flag == 1) {
+			shiftUpMatrixBuffer();
+			setTimer4(2000);
+		}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+	}
   /* USER CODE END 3 */
 }
 
